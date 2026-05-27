@@ -93,6 +93,7 @@ def build_estimate_html(ctx: dict) -> str:
         clinic_logo_html = f'<div class="clinic-name">{ctx["clinic_name"]}</div>'
 
     # 폰트 @font-face (레포의 NanumGothic.ttf 임베드)
+    # normal + bold 두 굵기를 등록해야 font-weight:700이 진짜 굵은 폰트로 렌더됨
     font_face = ""
     font_family = "sans-serif"
     if ctx["font_uri"]:
@@ -101,6 +102,14 @@ def build_estimate_html(ctx: dict) -> str:
             font-family: 'NanumGothic';
             src: url('{ctx["font_uri"]}') format('truetype');
             font-weight: normal;
+        }}"""
+        # Bold 폰트가 있으면 추가 등록
+        if ctx.get("font_bold_uri"):
+            font_face += f"""
+        @font-face {{
+            font-family: 'NanumGothic';
+            src: url('{ctx["font_bold_uri"]}') format('truetype');
+            font-weight: bold;
         }}"""
         font_family = "'NanumGothic', sans-serif"
 
@@ -149,14 +158,14 @@ body {{ font-family: {font_family}; color: #2C2C2A; margin: 0; padding: 0; }}
 .patient-info {{ font-size: 9pt; color: #5F5E5A; line-height: 1.6; }}
 .headline-wrap {{ margin-top: 14pt; }}
 .headline-eyebrow {{ font-size: 8.5pt; color: #1D9E75; letter-spacing: 0.1em; margin-bottom: 6pt; }}
-.headline {{ font-size: 22pt; font-weight: 700; line-height: 1.2; letter-spacing: -0.02em; color: #0F6E56; }}
+.headline {{ font-size: 22pt; font-weight: 800; line-height: 1.2; letter-spacing: -0.02em; color: #0F6E56; }}
 
 .product-panel {{ width: 78mm; background: #0A0A0A; border-radius: 4pt; overflow: hidden; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }}
 .product-panel img {{ width: 100%; height: auto; display: block; }}
 
 .price-box {{ margin-top: 14pt; background: #E1F5EE; padding: 13pt 16pt; border-radius: 3pt; display: flex; justify-content: space-between; align-items: flex-end; }}
 .price-cap {{ font-size: 7.5pt; color: #0F6E56; letter-spacing: 0.12em; margin-bottom: 4pt; }}
-.price-main {{ font-size: 19pt; font-weight: 700; color: #0F6E56; letter-spacing: -0.02em; line-height: 1.1; }}
+.price-main {{ font-size: 19pt; font-weight: 800; color: #0F6E56; letter-spacing: -0.02em; line-height: 1.1; }}
 .price-unit {{ font-size: 10pt; margin-left: 3pt; }}
 .price-sub {{ font-size: 7pt; color: #0F6E56; margin-top: 4pt; opacity: 0.75; }}
 
@@ -434,6 +443,7 @@ if generate_pdf:
                 "implant_uri": to_data_uri("implant_new.png", "image/png"),
                 "qr_uri": to_data_uri("qrcode.png", "image/png"),
                 "font_uri": to_data_uri("NanumGothic.ttf", "font/ttf"),
+                "font_bold_uri": to_data_uri("NanumGothicBold.ttf", "font/ttf"),
             }
 
             html_str = build_estimate_html(ctx)
