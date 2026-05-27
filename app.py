@@ -171,11 +171,12 @@ body {{ font-family: {font_family}; color: #2C2C2A; margin: 0; padding: 0; }}
 .price-sub {{ font-size: 7pt; color: #2D7662; margin-top: 4pt; opacity: 0.75; }}
 
 .item-table {{ margin-top: 12pt; }}
-.item-header {{ display: grid; grid-template-columns: 1fr auto auto; gap: 14pt; font-size: 7pt; color: #595850; letter-spacing: 0.12em; padding-bottom: 5pt; border-bottom: 0.6px solid #9A988E; }}
-.item-header > div:last-child {{ text-align: right; }}
-.item-row {{ display: grid; grid-template-columns: 1fr auto auto; gap: 14pt; font-size: 9.5pt; padding: 7pt 0; border-bottom: 0.5px solid #E5E4DF; }}
+.item-header {{ display: grid; grid-template-columns: 1fr 90pt 110pt; gap: 14pt; font-size: 7pt; color: #595850; letter-spacing: 0.12em; padding-bottom: 5pt; border-bottom: 0.6px solid #9A988E; }}
+.item-header > div:nth-child(2) {{ text-align: right; }}
+.item-header > div:nth-child(3) {{ text-align: right; }}
+.item-row {{ display: grid; grid-template-columns: 1fr 90pt 110pt; gap: 14pt; font-size: 9.5pt; padding: 7pt 0; border-bottom: 0.5px solid #E5E4DF; }}
 .item-row > div:nth-child(1) {{ font-weight: 700; }}
-.item-row > div:nth-child(2) {{ color: #5F5E5A; }}
+.item-row > div:nth-child(2) {{ color: #5F5E5A; text-align: right; }}
 .item-row > div:nth-child(3) {{ text-align: right; font-weight: 700; }}
 
 .brand-section {{ margin-top: auto; padding-top: 14pt; border-top: 1px solid #2C2C2A; }}
