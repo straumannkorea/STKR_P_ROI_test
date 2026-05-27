@@ -158,8 +158,8 @@ body {{ font-family: {font_family}; color: #2C2C2A; margin: 0; padding: 0; }}
 .patient-info {{ font-size: 9pt; color: #5F5E5A; line-height: 1.6; }}
 .headline-wrap {{ margin-top: 14pt; }}
 .headline-eyebrow {{ font-size: 8.5pt; color: #1D9E75; letter-spacing: 0.1em; margin-bottom: 6pt; }}
-.headline {{ font-size: 22pt; font-weight: 400; line-height: 1.2; letter-spacing: -0.02em; color: #0F6E56; }}
-.headline strong {{ font-weight: 800; }}
+.headline {{ font-size: 22pt; font-weight: 400; line-height: 1.2; letter-spacing: -0.02em; color: #36393A; }}
+.headline strong {{ font-weight: 800; color: #46B98C; }}
 
 .product-panel {{ width: 78mm; background: transparent; border-radius: 4pt; overflow: hidden; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }}
 .product-panel img {{ width: 100%; height: auto; display: block; }}
