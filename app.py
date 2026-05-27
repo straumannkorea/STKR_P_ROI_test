@@ -159,16 +159,16 @@ body {{ font-family: {font_family}; color: #2C2C2A; margin: 0; padding: 0; }}
 .headline-wrap {{ margin-top: 14pt; }}
 .headline-eyebrow {{ font-size: 8.5pt; color: #1D9E75; letter-spacing: 0.1em; margin-bottom: 6pt; }}
 .headline {{ font-size: 22pt; font-weight: 400; line-height: 1.2; letter-spacing: -0.02em; color: #36393A; }}
-.headline strong {{ font-weight: 800; color: #46B98C; }}
+.headline strong {{ font-weight: 800; color: #2D7662; }}
 
 .product-panel {{ width: 78mm; background: transparent; border-radius: 4pt; overflow: hidden; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }}
 .product-panel img {{ width: 100%; height: auto; display: block; }}
 
 .price-box {{ margin-top: 14pt; background: #E1F5EE; padding: 13pt 16pt; border-radius: 3pt; display: flex; justify-content: space-between; align-items: flex-end; }}
-.price-cap {{ font-size: 7.5pt; color: #0F6E56; letter-spacing: 0.12em; margin-bottom: 4pt; }}
-.price-main {{ font-size: 19pt; font-weight: 800; color: #0F6E56; letter-spacing: -0.02em; line-height: 1.1; }}
+.price-cap {{ font-size: 7.5pt; color: #2D7662; letter-spacing: 0.12em; margin-bottom: 4pt; }}
+.price-main {{ font-size: 19pt; font-weight: 800; color: #2D7662; letter-spacing: -0.02em; line-height: 1.1; }}
 .price-unit {{ font-size: 10pt; margin-left: 3pt; }}
-.price-sub {{ font-size: 7pt; color: #0F6E56; margin-top: 4pt; opacity: 0.75; }}
+.price-sub {{ font-size: 7pt; color: #2D7662; margin-top: 4pt; opacity: 0.75; }}
 
 .item-table {{ margin-top: 12pt; }}
 .item-header {{ display: grid; grid-template-columns: 1fr auto auto; gap: 14pt; font-size: 7pt; color: #595850; letter-spacing: 0.12em; padding-bottom: 5pt; border-bottom: 0.6px solid #9A988E; }}
@@ -184,7 +184,7 @@ body {{ font-family: {font_family}; color: #2C2C2A; margin: 0; padding: 0; }}
 .brand-copy {{ font-size: 8.5pt; line-height: 1.7; color: #444441; }}
 .stat-grid {{ display: grid; grid-template-columns: 1fr 1fr; gap: 5pt; }}
 .stat-card {{ border: 0.6px solid #9A988E; padding: 7pt 8pt; border-radius: 2pt; }}
-.stat-value {{ font-size: 13pt; font-weight: 700; color: #0F6E56; line-height: 1.1; }}
+.stat-value {{ font-size: 13pt; font-weight: 700; color: #2D7662; line-height: 1.1; }}
 .stat-unit {{ font-size: 7.5pt; color: #595850; margin-left: 2pt; font-weight: 400; }}
 .stat-sup {{ font-size: 6pt; color: #595850; margin-left: 1pt; vertical-align: super; }}
 .stat-label {{ font-size: 7.5pt; color: #5F5E5A; margin-top: 2pt; }}
@@ -226,7 +226,7 @@ body {{ font-family: {font_family}; color: #2C2C2A; margin: 0; padding: 0; }}
       </div>
       <div class="headline-wrap">
         <div class="headline-eyebrow">임플란트, 그 이상의 가치</div>
-        <div class="headline"><strong>70년의 헤리티지</strong>를<br>매일 <strong>{ctx["daily_cost"]:,}원</strong>에.</div>
+        <div class="headline"><strong>70년의 헤리티지</strong>를<br>매일 <strong class="price">{ctx["daily_cost"]:,}원</strong>에.</div>
       </div>
     </div>
     {product_panel}
