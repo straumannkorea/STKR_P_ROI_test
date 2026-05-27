@@ -147,7 +147,7 @@ body {{ font-family: {font_family}; color: #2C2C2A; margin: 0; padding: 0; }}
 .page {{ width: 210mm; height: 297mm; padding: 16mm 14mm; display: flex; flex-direction: column; }}
 
 .header {{ display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 1px solid #2C2C2A; padding-bottom: 10pt; }}
-.label-cap {{ font-size: 7pt; letter-spacing: 0.15em; color: #888780; margin-bottom: 4pt; }}
+.label-cap {{ font-size: 7pt; letter-spacing: 0.15em; color: #595850; margin-bottom: 4pt; }}
 .clinic-name {{ font-size: 18pt; font-weight: 700; letter-spacing: -0.02em; white-space: nowrap; }}
 .header-right {{ text-align: right; }}
 .header-right img {{ height: 20pt; display: block; margin-left: auto; }}
@@ -158,9 +158,10 @@ body {{ font-family: {font_family}; color: #2C2C2A; margin: 0; padding: 0; }}
 .patient-info {{ font-size: 9pt; color: #5F5E5A; line-height: 1.6; }}
 .headline-wrap {{ margin-top: 14pt; }}
 .headline-eyebrow {{ font-size: 8.5pt; color: #1D9E75; letter-spacing: 0.1em; margin-bottom: 6pt; }}
-.headline {{ font-size: 22pt; font-weight: 800; line-height: 1.2; letter-spacing: -0.02em; color: #0F6E56; }}
+.headline {{ font-size: 22pt; font-weight: 400; line-height: 1.2; letter-spacing: -0.02em; color: #0F6E56; }}
+.headline strong {{ font-weight: 800; }}
 
-.product-panel {{ width: 78mm; background: #0A0A0A; border-radius: 4pt; overflow: hidden; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }}
+.product-panel {{ width: 78mm; background: transparent; border-radius: 4pt; overflow: hidden; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }}
 .product-panel img {{ width: 100%; height: auto; display: block; }}
 
 .price-box {{ margin-top: 14pt; background: #E1F5EE; padding: 13pt 16pt; border-radius: 3pt; display: flex; justify-content: space-between; align-items: flex-end; }}
@@ -170,7 +171,7 @@ body {{ font-family: {font_family}; color: #2C2C2A; margin: 0; padding: 0; }}
 .price-sub {{ font-size: 7pt; color: #0F6E56; margin-top: 4pt; opacity: 0.75; }}
 
 .item-table {{ margin-top: 12pt; }}
-.item-header {{ display: grid; grid-template-columns: 1fr auto auto; gap: 14pt; font-size: 7pt; color: #888780; letter-spacing: 0.12em; padding-bottom: 5pt; border-bottom: 0.5px solid #B4B2A9; }}
+.item-header {{ display: grid; grid-template-columns: 1fr auto auto; gap: 14pt; font-size: 7pt; color: #595850; letter-spacing: 0.12em; padding-bottom: 5pt; border-bottom: 0.6px solid #9A988E; }}
 .item-header > div:last-child {{ text-align: right; }}
 .item-row {{ display: grid; grid-template-columns: 1fr auto auto; gap: 14pt; font-size: 9.5pt; padding: 7pt 0; border-bottom: 0.5px solid #E5E4DF; }}
 .item-row > div:nth-child(1) {{ font-weight: 700; }}
@@ -182,22 +183,22 @@ body {{ font-family: {font_family}; color: #2C2C2A; margin: 0; padding: 0; }}
 .brand-label {{ font-size: 7.5pt; color: #1D9E75; letter-spacing: 0.12em; margin-bottom: 6pt; }}
 .brand-copy {{ font-size: 8.5pt; line-height: 1.7; color: #444441; }}
 .stat-grid {{ display: grid; grid-template-columns: 1fr 1fr; gap: 5pt; }}
-.stat-card {{ border: 0.5px solid #B4B2A9; padding: 7pt 8pt; border-radius: 2pt; }}
+.stat-card {{ border: 0.6px solid #9A988E; padding: 7pt 8pt; border-radius: 2pt; }}
 .stat-value {{ font-size: 13pt; font-weight: 700; color: #0F6E56; line-height: 1.1; }}
-.stat-unit {{ font-size: 7.5pt; color: #888780; margin-left: 2pt; font-weight: 400; }}
-.stat-sup {{ font-size: 6pt; color: #888780; margin-left: 1pt; vertical-align: super; }}
+.stat-unit {{ font-size: 7.5pt; color: #595850; margin-left: 2pt; font-weight: 400; }}
+.stat-sup {{ font-size: 6pt; color: #595850; margin-left: 1pt; vertical-align: super; }}
 .stat-label {{ font-size: 7.5pt; color: #5F5E5A; margin-top: 2pt; }}
 
-.citations {{ margin-top: 10pt; padding-top: 8pt; border-top: 0.5px solid #E5E4DF; font-size: 6pt; color: #888780; line-height: 1.55; }}
+.citations {{ margin-top: 10pt; padding-top: 8pt; border-top: 0.5px solid #E5E4DF; font-size: 6.5pt; color: #4A4945; line-height: 1.55; }}
 .citations sup {{ margin-right: 2pt; font-size: 5pt; }}
 .citations > div + div {{ margin-top: 2pt; }}
 
-.footer {{ margin-top: 10pt; padding-top: 10pt; border-top: 0.5px solid #B4B2A9; display: flex; justify-content: space-between; align-items: center; gap: 14pt; }}
-.notice {{ font-size: 6pt; color: #888780; line-height: 1.7; flex: 1; }}
+.footer {{ margin-top: 10pt; padding-top: 10pt; border-top: 0.6px solid #9A988E; display: flex; justify-content: space-between; align-items: center; gap: 14pt; }}
+.notice {{ font-size: 6.8pt; color: #4A4945; line-height: 1.7; flex: 1; }}
 .notice > div + div {{ margin-top: 2pt; }}
 .qr-block {{ display: flex; flex-direction: column; align-items: center; justify-content: center; flex-shrink: 0; }}
 .qr-block img {{ width: 36pt; height: 36pt; display: block; }}
-.qr-label {{ font-size: 6pt; color: #888780; margin-top: 4pt; letter-spacing: 0.05em; text-align: center; line-height: 1.4; }}
+.qr-label {{ font-size: 6pt; color: #595850; margin-top: 4pt; letter-spacing: 0.05em; text-align: center; line-height: 1.4; }}
 </style>
 </head>
 <body>
@@ -225,7 +226,7 @@ body {{ font-family: {font_family}; color: #2C2C2A; margin: 0; padding: 0; }}
       </div>
       <div class="headline-wrap">
         <div class="headline-eyebrow">임플란트, 그 이상의 가치</div>
-        <div class="headline">70년의 헤리티지를<br>매일 {ctx["daily_cost"]:,}원에.</div>
+        <div class="headline"><strong>70년의 헤리티지</strong>를<br>매일 <strong>{ctx["daily_cost"]:,}원</strong>에.</div>
       </div>
     </div>
     {product_panel}
