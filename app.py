@@ -254,7 +254,7 @@ body {{ font-family: {font_family}; color: #2C2C2A; margin: 0; padding: 0; }}
     <div class="brand-grid">
       <div>
         <div class="brand-label">WHY STRAUMANN</div>
-        <div class="brand-copy">스트라우만은 70년 이상 임플란트 분야의 연구와 임상 경험을 통해 전 세계 100여 개국에서 신뢰받는 1위 브랜드입니다. 10년 후 임플란트 생존율 99.7%의 임상데이터를 보유하고 있습니다.</div>
+        <div class="brand-copy">스트라우만은 70년 이상 임플란트 분야의 연구와 임상 경험을 통해 전 세계 100여 개국에서 신뢰받는 세계 임플란트 시장 점유율 1위 브랜드입니다. 장기 임상 연구에서도 10년 후 99.7%의 임플란트가 안정적으로 유지된 것으로 보고되었습니다.</div>
       </div>
       <div class="stat-grid">
         <div class="stat-card"><div class="stat-value">70<span class="stat-unit">YEARS</span></div><div class="stat-label">스위스 헤리티지</div></div>
