@@ -171,7 +171,7 @@ body {{ font-family: {font_family}; color: #2C2C2A; margin: 0; padding: 0; }}
 .price-unit {{ font-size: 10pt; margin-left: 3pt; }}
 .price-sub {{ font-size: 7pt; color: #2D7662; margin-top: 4pt; opacity: 0.75; }}
 
-.item-table {{ margin-top: 9pt; }}
+.item-table {{ margin-top: 14pt; }}
 .item-header {{ display: grid; grid-template-columns: 1fr 90pt 110pt; gap: 14pt; font-size: 7pt; color: #595850; letter-spacing: 0.12em; padding-bottom: 5pt; border-bottom: 0.6px solid #9A988E; }}
 .item-header > div:nth-child(2) {{ text-align: right; }}
 .item-header > div:nth-child(3) {{ text-align: right; }}
