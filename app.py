@@ -165,13 +165,7 @@ body {{ font-family: {font_family}; color: #2C2C2A; margin: 0; padding: 0; }}
 .product-panel img {{ width: 100%; height: auto; display: block; }}
 
 .price-box {{ margin-top: 14pt; background: #E1F5EE; padding: 13pt 16pt; border-radius: 3pt; display: flex; justify-content: space-between; align-items: flex-end; }}
-.price-box-note {
-    margin-top: 3pt;
-    font-size: 6pt;
-    color: #5F5E5A;
-    line-height: 1.3;
-    padding-left: 2pt;
-}
+.price-box-note {{ margin-top: 3pt; font-size: 6pt; color: #5F5E5A; line-height: 1.3; padding-left: 2pt; }}
 .price-cap {{ font-size: 7.5pt; color: #2D7662; letter-spacing: 0.12em; margin-bottom: 4pt; }}
 .price-main {{ font-size: 19pt; font-weight: 800; color: #2D7662; letter-spacing: -0.02em; line-height: 1.1; }}
 .price-unit {{ font-size: 10pt; margin-left: 3pt; }}
