@@ -227,8 +227,8 @@ body {{ font-family: {font_family}; color: #2C2C2A; margin: 0; padding: 0; }}
         </div>
       </div>
       <div class="headline-wrap">
-        <div class="headline-eyebrow">임플란트, 그 이상의 가치</div>
-        <div class="headline"><strong>70년의 헤리티지</strong>를<br>매일 <strong class="price">{ctx["daily_cost"]:,}원</strong>에.</div>
+        <div class="headline-eyebrow">ESTIMATE</div>
+        <div class="headline">임플란트 치료<br><strong>예상 치료비 안내서</strong></div>
       </div>
     </div>
     {product_panel}
@@ -236,9 +236,9 @@ body {{ font-family: {font_family}; color: #2C2C2A; margin: 0; padding: 0; }}
 
   <div class="price-box">
     <div>
-      <div class="price-cap">상담가 / CONSULTATION PRICE</div>
+      <div class="price-cap">예상 치료비 / ESTIMATED COST</div>
       <div class="price-main">{ctx["consult_price"]:,}<span class="price-unit">원</span></div>
-      <div class="price-sub">원내 공식 비급여 고찰가격: {ctx["total_price"]:,}원</div>
+      <div class="price-sub">임플란트 총비용: {ctx["total_price"]:,}원</div>
     </div>
     <div style="text-align: right;">
       <div class="price-cap">하루 평균 / {ctx["years"]}년 기준</div>
@@ -257,11 +257,11 @@ body {{ font-family: {font_family}; color: #2C2C2A; margin: 0; padding: 0; }}
     <div class="brand-grid">
       <div>
         <div class="brand-label">WHY STRAUMANN</div>
-        <div class="brand-copy">스트라우만은 70년 이상 임플란트 분야의 연구와 임상 경험을 통해 전 세계 100여 개국에서 신뢰받는 세계 임플란트 시장 점유율 1위 브랜드입니다. 장기 임상 연구에서도 10년 후 99.7%의 임플란트가 안정적으로 유지된 것으로 보고되었습니다.</div>
+        <div class="brand-copy">스트라우만은 70년 이상 임플란트 분야의 연구와 임상 경험을 통해 전 세계 100여 개국에서 신뢰받는 세계 임플란트 시장 점유율 1위 브랜드입니다.<sup>2</sup> 특정 10년 전향적 코호트 연구에서는 implant-level survival rate 99.7%, patient-level survival rate 99.4%가 보고되었으며,<sup>1</sup> 해당 수치는 특정 연구 대상·조건·기간에서 보고된 결과로 모든 환자에게 동일하게 적용되지 않습니다.</div>
       </div>
       <div class="stat-grid">
         <div class="stat-card"><div class="stat-value">70<span class="stat-unit">YEARS</span></div><div class="stat-label">스위스 헤리티지</div></div>
-        <div class="stat-card"><div class="stat-value">99.7<span class="stat-unit">%</span><span class="stat-sup">1</span></div><div class="stat-label">10년 생존율</div></div>
+        <div class="stat-card"><div class="stat-value">99.7<span class="stat-unit">%</span><span class="stat-sup">1</span></div><div class="stat-label">10년 implant-level<br>survival rate (보고치)</div></div>
         <div class="stat-card"><div class="stat-value">#1<span class="stat-unit">GLOBAL</span><span class="stat-sup">2</span></div><div class="stat-label">세계 시장 점유율</div></div>
         <div class="stat-card"><div class="stat-value">100<span class="stat-unit">+</span></div><div class="stat-label">국가 사용</div></div>
       </div>
@@ -274,9 +274,9 @@ body {{ font-family: {font_family}; color: #2C2C2A; margin: 0; padding: 0; }}
 
   <div class="footer">
     <div class="notice">
-      <div>※ 본 안내서는 환자 상담용 참고자료로, 정확한 비용은 수술 계획에 따라 변경될 수 있으며 무단 전재 및 온라인 게시를 금지합니다.</div>
-      <div>※ 임플란트는 관리 여하에 따라 사용기간이 상이합니다.</div>
-      <div>※ 환자의 식별 정보는 저장되지 않고, 상담 종료 시 삭제됩니다.</div>
+      <div>※ 표시된 금액은 입력값을 기준으로 단순 환산한 예시이며, 실제 치료비, 치료 결과 및 사용기간은 환자의 상태, 치료계획, 시술 조건 및 사후 관리에 따라 달라질 수 있습니다.</div>
+      <div>※ 본 자료는 외부 배포, SNS, 블로그, 광고물 등에 사용할 수 없습니다.</div>
+      <div>※ 환자의 식별 정보는 저장되지 않으며, 상담 종료 시 삭제됩니다.</div>
       <div style="margin-top:4pt;">문의: {ctx["contact_info"]}</div>
     </div>
     {qr_html}
@@ -294,41 +294,20 @@ with st.sidebar:
     st.header("🏆 스트라우만 임상 데이터")
 
     st.markdown("""
-        <table style="width:100%; border-collapse: collapse; font-size: 0.9rem;">
-            <tr style="border-bottom: 1px solid #ddd; text-align: left;">
-                <th style="padding: 8px;">브랜드</th>
-                <th style="padding: 8px;">장기생존률</th>
-                <th style="padding: 8px;">근거</th>
-            </tr>
-            <tr style="border-bottom: 1px solid #eee;">
-                <td style="padding: 8px;"><b>스트라우만</b></td>
-                <td style="padding: 8px;"><b>99.7%</b></td>
-                <td style="padding: 8px;">
-                    <span class="active-tooltip">
-                        <a href="https://pubmed.ncbi.nlm.nih.gov/25370914/" target="_blank">10년이상의 연구논문</a>
-                        <span class="tooltip-content">van Velzen FJ, et al. J Clin Periodontal. 2015; 374 implants, 177 patients, 10-year follow-up</span>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td style="padding: 8px;">임플란트 평균</td>
-                <td style="padding: 8px;">약 93~96%</td>
-                <td style="padding: 8px;">
-                    <span class="active-tooltip">
-                        <a href="https://www.sciencedirect.com/science/article/abs/pii/S0300571219300491" target="_blank">메타분석 데이터</a>
-                        <span class="tooltip-content">Howe MS, Keys W, Richards D. J Dent. 2019;84:9-21.</span>
-                    </span>
-                </td>
-            </tr>
-        </table>
+        <div style="font-size: 0.92rem; line-height: 1.6; color: #333;">
+            특정 10년 전향적 코호트 연구에서 Straumann SLA surface implant의
+            implant-level survival rate가 <b>99.7%</b>로 보고되었습니다.
+        </div>
     """, unsafe_allow_html=True)
 
-    st.caption("개인별 차이가 있을 수 있습니다.")
+    st.caption("van Velzen FJ, et al. J Clin Periodontol. 2015; 374 implants, 177 patients, 10-year follow-up")
+
+    st.caption("개인별 차이가 있을 수 있습니다. 해당 수치는 특정 연구 대상, 조건 및 기간에서 보고된 결과이며, 모든 환자에게 동일하게 적용되지 않습니다.")
 
     st.markdown("""
         <div style="background-color: #36393A; color: white; padding: 15px; border-radius: 8px; margin-top: 5px;">
-            <b>🎓 연세대 조규성 교수팀 10년 연구</b><br>
-            <span style="font-size: 0.9em;">- 1,692건 추적 결과 98.2% 이상의 장기생존율 입증</span>
+            <b>📚 국내 장기 추적 연구</b><br>
+            <span style="font-size: 0.9em;">Straumann SLA surface implant에 대해 특정 연구 조건에서 10년 implant-level survival rate 99.7%, patient-level survival rate 99.4%가 보고되었습니다.</span>
         </div>
     """, unsafe_allow_html=True)
 
@@ -371,14 +350,13 @@ with tab1:
         total_p = st.number_input("임플란트 총 비용 (원)", value=1500000, step=10000)
         discount = st.number_input("조정 금액 (원)", value=0, step=10000)
         final_p = total_p - discount
-        st.markdown(f"**상담 가격 : {final_p:,.0f}원**")
-        st.caption(f"(원내 공식 비급여 고찰가격 : {total_p:,.0f}원)")
+        st.markdown(f"**예상 치료비 : {final_p:,.0f}원**")
+        st.caption(f"(임플란트 총비용 : {total_p:,.0f}원)")
     with c2:
         years = st.slider("예상 사용 기간 (년)", 5, 50, 20)
         st.markdown(f"**견적 유효기간:** {full_validity_dt}")
         st.markdown("""
             <div style="color: #A9A9A9; font-size: 0.85rem; margin-top: 10px; line-height: 1.4;">
-                * 의사 판단하에 측정된 수치입니다.<br>
                 * 환자분의 건강상태 / 관리 여하에 따라 상이할 수 있습니다. <br>
                 * 해당 계산결과는 이해를 돕기위한 단순환산 예시입니다.
             </div>
@@ -387,18 +365,20 @@ with tab1:
     daily_roi = final_p / (years * 365)
     st.markdown(f"""
         <div style='background-color:#f8f9fa; padding:40px; border-radius:15px; border-left: 10px solid #46B98C; text-align:center; margin-top: 20px;'>
-            <p style='font-size:1.2rem; color:#555;'>환자분의 하루 평균 투자 비용은</p>
+            <p style='font-size:1.2rem; color:#555;'>예상 사용기간 기준 하루 평균 환산 금액</p>
             <h2 style='margin:0; color:#46B98C; font-size:4.5rem;'>{int(daily_roi):,}원</h2>
-            <p style='font-size:1.1rem; color:#333; margin-top:10px;'>
-                <b>하루 {int(daily_roi):,}원으로 {years}년 동안 건강한 미소를 유지하세요.</b>
+            <p style='font-size:0.95rem; color:#666; margin-top:15px; line-height:1.5;'>
+                입력한 금액과 예상 사용기간을 기준으로 단순 환산한 참고 금액입니다.<br>
+                실제 사용기간, 치료 결과 및 유지 상태는 환자의 구강 상태, 시술 조건 및 사후 관리에 따라 달라질 수 있습니다.
             </p>
         </div>
     """, unsafe_allow_html=True)
 
     st.markdown("""
         <div class="footer-disclaimer">
-            본 상담툴은 의료진의 상담 참고용이며, 외부(SNS, 블로그 등)으로 유출을 금지합니다.<br>
-            환자의 식별 정보는 저장되지 않고, 상담 종료 시 삭제됩니다.
+            표시된 금액은 입력값을 기준으로 단순 환산한 예시이며, 실제 치료비, 치료 결과 및 사용기간은 환자의 상태, 치료계획, 시술 조건 및 사후 관리에 따라 달라질 수 있습니다.<br>
+            본 자료는 외부 배포, SNS, 블로그, 광고물 등에 사용할 수 없습니다.<br>
+            환자의 식별 정보는 저장되지 않으며, 상담 종료 시 삭제됩니다.
         </div>
     """, unsafe_allow_html=True)
 
