@@ -54,6 +54,99 @@ st.markdown("""
         padding-top: 20px;
         line-height: 1.6;
     }
+    .evidence-card {
+        background: linear-gradient(135deg, #E8F8F3 0%, #FFFFFF 100%);
+        border: 1px solid #D1EFE5;
+        border-radius: 18px;
+        padding: 20px 22px;
+        margin: 14px 0;
+        box-shadow: 0 8px 24px rgba(29, 158, 117, 0.08);
+    }
+    .evidence-label {
+        font-size: 0.78rem;
+        letter-spacing: 0.08em;
+        color: #1D9E75;
+        font-weight: 800;
+        margin-bottom: 8px;
+    }
+    .evidence-title {
+        font-size: 1.35rem;
+        line-height: 1.35;
+        letter-spacing: -0.03em;
+        color: #36393A;
+        font-weight: 800;
+        margin-bottom: 8px;
+    }
+    .evidence-title strong {
+        color: #1D9E75;
+    }
+    .evidence-copy {
+        font-size: 0.94rem;
+        line-height: 1.65;
+        color: #4A4945;
+    }
+    .evidence-number {
+        font-size: 2.7rem;
+        line-height: 1;
+        color: #1D9E75;
+        font-weight: 900;
+        letter-spacing: -0.04em;
+        margin-bottom: 6px;
+    }
+    .evidence-muted {
+        color: #6B6A66;
+        font-size: 0.82rem;
+        line-height: 1.55;
+        margin-top: 10px;
+    }
+    .metric-grid-ui {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+        margin: 18px 0;
+    }
+    .metric-card-ui {
+        background: #FFFFFF;
+        border: 1px solid #E2E8E5;
+        border-radius: 16px;
+        padding: 18px 16px;
+        min-height: 132px;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.045);
+    }
+    .metric-value-ui {
+        color: #1D9E75;
+        font-size: 2.1rem;
+        font-weight: 900;
+        line-height: 1;
+        letter-spacing: -0.04em;
+    }
+    .metric-label-ui {
+        margin-top: 8px;
+        color: #36393A;
+        font-weight: 800;
+        line-height: 1.35;
+    }
+    .metric-desc-ui {
+        margin-top: 8px;
+        color: #666;
+        font-size: 0.82rem;
+        line-height: 1.45;
+    }
+    .active-tooltip .tooltip-content {
+        text-align: left;
+    }
+    .source-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        margin-top: 12px;
+        color: #1D9E75;
+        font-size: 0.82rem;
+        font-weight: 800;
+    }
+    @media (max-width: 760px) {
+        .metric-grid-ui { grid-template-columns: 1fr; }
+    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -160,6 +253,7 @@ body {{ font-family: {font_family}; color: #2C2C2A; margin: 0; padding: 0; }}
 .headline-eyebrow {{ font-size: 8.5pt; color: #1D9E75; letter-spacing: 0.1em; margin-bottom: 6pt; }}
 .headline {{ font-size: 22pt; font-weight: 400; line-height: 1.2; letter-spacing: -0.02em; color: #36393A; }}
 .headline strong {{ font-weight: 800; color: #2D7662; }}
+.headline-sub {{ margin-top: 7pt; font-size: 8.5pt; color: #5F5E5A; line-height: 1.45; }}
 
 .product-panel {{ width: 78mm; background: transparent; border-radius: 4pt; overflow: hidden; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }}
 .product-panel img {{ width: 100%; height: auto; display: block; }}
@@ -228,7 +322,8 @@ body {{ font-family: {font_family}; color: #2C2C2A; margin: 0; padding: 0; }}
       </div>
       <div class="headline-wrap">
         <div class="headline-eyebrow">ESTIMATE</div>
-        <div class="headline">임플란트 치료<br><strong>예상 치료비 안내서</strong></div>
+        <div class="headline">70년 헤리티지를<br><strong>{ctx["consult_price"]:,}원에</strong></div>
+        <div class="headline-sub">환자 상담을 위한 예상 치료비 안내서</div>
       </div>
     </div>
     {product_panel}
@@ -257,18 +352,14 @@ body {{ font-family: {font_family}; color: #2C2C2A; margin: 0; padding: 0; }}
     <div class="brand-grid">
       <div>
         <div class="brand-label">WHY STRAUMANN</div>
-        <div class="brand-copy">스트라우만은 70년 이상 임플란트 분야의 연구와 임상 경험을 통해 전 세계 100여 개국에서 신뢰받는 세계 임플란트 시장 점유율 1위 브랜드입니다.<sup>2</sup> 특정 10년 전향적 코호트 연구에서는 implant-level survival rate 99.7%, patient-level survival rate 99.4%가 보고되었으며,<sup>1</sup> 해당 수치는 특정 연구 대상·조건·기간에서 보고된 결과로 모든 환자에게 동일하게 적용되지 않습니다.</div>
+        <div class="brand-copy">스트라우만은 70년 이상 임플란트 분야의 연구와 임상 경험을 바탕으로 전 세계 100여 개국에서 신뢰받는 글로벌 임플란트 브랜드입니다.</div>
       </div>
       <div class="stat-grid">
-        <div class="stat-card"><div class="stat-value">70<span class="stat-unit">YEARS</span></div><div class="stat-label">스위스 헤리티지</div></div>
-        <div class="stat-card"><div class="stat-value">99.7<span class="stat-unit">%</span><span class="stat-sup">1</span></div><div class="stat-label">10년 implant-level<br>survival rate (보고치)</div></div>
-        <div class="stat-card"><div class="stat-value">#1<span class="stat-unit">GLOBAL</span><span class="stat-sup">2</span></div><div class="stat-label">세계 시장 점유율</div></div>
+        <div class="stat-card"><div class="stat-value">{ctx["consult_price"]:,}<span class="stat-unit">원에</span></div><div class="stat-label">스트라우만 임플란트 치료<br>예상 치료비</div></div>
+        <div class="stat-card"><div class="stat-value">98.23<span class="stat-unit">%</span></div><div class="stat-label">국내 10년 누적 생존율<br>(임플란트 기준)</div></div>
+        <div class="stat-card"><div class="stat-value">#1<span class="stat-unit">GLOBAL</span></div><div class="stat-label">세계 시장 점유율</div></div>
         <div class="stat-card"><div class="stat-value">100<span class="stat-unit">+</span></div><div class="stat-label">국가 사용</div></div>
       </div>
-    </div>
-    <div class="citations">
-      <div><sup>1</sup>van Velzen FJ, et al. J Clin Periodontol. 2015; 374 implants, 177 patients, 10-year follow-up</div>
-      <div><sup>2</sup>Fortune Business Insights, Dental Implants – Global Market Analysis, Insights and Forecast, 2021–2028 (2021년 기준)</div>
     </div>
   </div>
 
@@ -291,23 +382,27 @@ body {{ font-family: {font_family}; color: #2C2C2A; margin: 0; padding: 0; }}
 # 사이드바: 데이터 및 견적 정보
 # ==========================================================
 with st.sidebar:
-    st.header("🏆 스트라우만 임상 데이터")
+    st.header("🏆 스트라우만 핵심 근거")
 
     st.markdown("""
-        <div style="font-size: 0.92rem; line-height: 1.6; color: #333;">
-            특정 10년 전향적 코호트 연구에서 Straumann SLA surface implant의
-            implant-level survival rate가 <b>99.7%</b>로 보고되었습니다.
+        <div class="evidence-card">
+            <div class="evidence-label">DOMESTIC LONG-TERM DATA</div>
+            <div class="evidence-number">98.23%</div>
+            <div class="evidence-title">국내 장기 추적 연구에서 보고된<br><strong>10년 누적 생존율</strong></div>
+            <div class="evidence-copy">Straumann tissue-level 임플란트의 10년 누적 생존율이 임플란트 기준 98.23%로 보고되었습니다.</div>
+            <div class="active-tooltip source-chip">연구 조건 보기
+                <span class="tooltip-content">후향적 방사선 관찰 연구 기준. 881명 환자, 1,692개 Straumann tissue-level 임플란트 대상. 환자 기준 10년 누적 생존율은 95.70%로 보고되었습니다. Kim S, Jung U-W, Cho K-S, Lee J-S. Clin Implant Dent Relat Res. 2018.</span>
+            </div>
+            <div class="evidence-muted">* 연구 결과는 특정 연구 조건에서 관찰된 결과이며, 개인의 구강 상태와 치료 환경에 따라 달라질 수 있습니다.</div>
         </div>
-    """, unsafe_allow_html=True)
 
-    st.caption("van Velzen FJ, et al. J Clin Periodontol. 2015; 374 implants, 177 patients, 10-year follow-up")
-
-    st.caption("개인별 차이가 있을 수 있습니다. 해당 수치는 특정 연구 대상, 조건 및 기간에서 보고된 결과이며, 모든 환자에게 동일하게 적용되지 않습니다.")
-
-    st.markdown("""
-        <div style="background-color: #36393A; color: white; padding: 15px; border-radius: 8px; margin-top: 5px;">
-            <b>📚 국내 장기 추적 연구</b><br>
-            <span style="font-size: 0.9em;">Straumann SLA surface implant에 대해 특정 연구 조건에서 10년 implant-level survival rate 99.7%, patient-level survival rate 99.4%가 보고되었습니다.</span>
+        <div class="evidence-card">
+            <div class="evidence-label">GLOBAL BRAND</div>
+            <div class="evidence-title">70년 이상 이어온 임플란트 연구와 임상 경험</div>
+            <div class="evidence-copy">전 세계 100여 개국에서 사용되는 글로벌 임플란트 브랜드입니다.</div>
+            <div class="active-tooltip source-chip">출처 보기
+                <span class="tooltip-content">세계 시장 점유율 관련 표현은 Fortune Business Insights, Dental Implants - Global Market Analysis, Insights and Forecast, 2021-2028 자료 기준입니다.</span>
+            </div>
         </div>
     """, unsafe_allow_html=True)
 
@@ -383,17 +478,36 @@ with tab1:
     """, unsafe_allow_html=True)
 
 with tab2:
-    st.subheader("신뢰의 브랜드, 스트라우만. 그 이유는?")
-    detail_images = ["상세페이지 1.png", "상세페이지 2.png", "상세페이지 3.png"]
-    for img in detail_images:
-        if os.path.exists(img):
-            st.image(img, use_container_width=True)
-        else:
-            st.warning(f"이미지 파일 '{img}'이 폴더에 없습니다. 확인해 주세요.")
+    st.subheader("오래 쓰는 선택, 스트라우만")
+    st.markdown("""
+        <div class="evidence-card">
+            <div class="evidence-label">WHY STRAUMANN</div>
+            <div class="evidence-title">임플란트는 가격만이 아니라<br><strong>오래 사용할 가치</strong>까지 함께 봐야 합니다.</div>
+            <div class="evidence-copy">스트라우만은 70년 이상 축적된 연구와 임상 경험을 바탕으로, 전 세계 100여 개국에서 사용되는 글로벌 임플란트 브랜드입니다.</div>
+        </div>
+
+        <div class="metric-grid-ui">
+            <div class="metric-card-ui">
+                <div class="metric-value-ui">98.23%</div>
+                <div class="metric-label-ui">국내 10년 누적 생존율</div>
+                <div class="metric-desc-ui">임플란트 기준 보고치입니다. <span class="active-tooltip">연구 조건<span class="tooltip-content">후향적 방사선 관찰 연구 기준. 881명 환자, 1,692개 Straumann tissue-level 임플란트 대상. 환자 기준 95.70%. Kim S, Jung U-W, Cho K-S, Lee J-S. Clin Implant Dent Relat Res. 2018.</span></span></div>
+            </div>
+            <div class="metric-card-ui">
+                <div class="metric-value-ui">70년+</div>
+                <div class="metric-label-ui">연구와 임상 경험</div>
+                <div class="metric-desc-ui">오랜 기간 축적된 연구 경험을 바탕으로 한 임플란트 브랜드입니다.</div>
+            </div>
+            <div class="metric-card-ui">
+                <div class="metric-value-ui">100+</div>
+                <div class="metric-label-ui">전 세계 사용 국가</div>
+                <div class="metric-desc-ui">세계 여러 국가의 치과 진료 현장에서 사용되고 있습니다.</div>
+            </div>
+        </div>
+    """, unsafe_allow_html=True)
 
     st.divider()
     st.subheader("🎥 스트라우만이 알려드리는 임플란트 빠르게 이해하기!")
-    st.write("스트라우만의 기술력과 전통으로, 건강하게 오래쓰는 임플란트. 진짜 나를 위한 선택.")
+    st.write("스트라우만의 기술력과 전통으로, 건강하게 오래 쓰는 임플란트. 진짜 나를 위한 선택.")
     st.video("https://www.youtube.com/watch?v=WHcWT5BRTCA")
 
 
