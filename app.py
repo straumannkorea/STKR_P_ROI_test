@@ -290,7 +290,6 @@ body {{ font-family: {font_family}; color: #2C2C2A; margin: 0; padding: 0; }}
 
   <div class="footer">
     <div class="notice">
-      <div>※ 표시된 금액은 입력값을 기준으로 단순 환산한 예시이며, 실제 치료비, 치료 결과 및 사용기간은 환자의 상태, 치료계획, 시술 조건 및 사후 관리에 따라 달라질 수 있습니다.</div>
       <div>※ 본 자료는 외부 배포, SNS, 블로그, 광고물 등에 사용할 수 없습니다.</div>
       <div>※ 환자의 식별 정보는 저장되지 않으며, 상담 종료 시 삭제됩니다.</div>
       <div style="margin-top:4pt;">문의: {ctx["contact_info"]}</div>
@@ -327,7 +326,6 @@ with st.sidebar:
             <div class="sidebar-evidence-title">10년 추적 연구에서 보고된<br>10년 생존율</div>
             <div class="sidebar-evidence-body">10년 추적 연구에서 Straumann SLA 표면 임플란트는 특정 연구 조건하에 10년 생존율 99.7%가 보고되었습니다.*</div>
             <div class="sidebar-mini-link">{tooltip_link('연구 조건 보기', tooltip_1)}</div>
-            <div class="sidebar-evidence-disclaimer">*해당 수치는 특정 연구 대상, 조건 및 기간에서 보고된 결과이며, 모든 환자에게 동일하게 적용되지 않습니다.</div>
         </div>
     """, unsafe_allow_html=True)
 
@@ -405,7 +403,6 @@ with tab1:
 
     st.markdown("""
         <div class="footer-disclaimer">
-            표시된 금액은 입력값을 기준으로 단순 환산한 예시이며, 실제 치료비, 치료 결과 및 사용기간은 환자의 상태, 치료계획, 시술 조건 및 사후 관리에 따라 달라질 수 있습니다.<br>
             본 자료는 외부 배포, SNS, 블로그, 광고물 등에 사용할 수 없습니다.<br>
             환자의 식별 정보는 저장되지 않으며, 상담 종료 시 삭제됩니다.
         </div>
@@ -414,9 +411,9 @@ with tab1:
 with tab2:
     st.subheader("오래 쓰는 선택, 스트라우만")
     detail_images = [
-        os.path.join(APP_DIR, "#상세페이지 1.png"),
-        os.path.join(APP_DIR, "#상세페이지 2.png"),
-        os.path.join(APP_DIR, "#상세페이지 3.png"),
+        os.path.join(APP_DIR, "#Uc0c1#Uc138#Ud398#Uc774#Uc9c0 1.png"),
+        os.path.join(APP_DIR, "#Uc0c1#Uc138#Ud398#Uc774#Uc9c0 2.png"),
+        os.path.join(APP_DIR, "#Uc0c1#Uc138#Ud398#Uc774#Uc9c0 3.png"),
     ]
     for img in detail_images:
         if os.path.exists(img):
