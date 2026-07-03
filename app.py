@@ -133,11 +133,20 @@ def bytes_to_data_uri(raw: bytes, mime: str) -> str:
 # 견적 PDF HTML 템플릿 생성 함수
 # ==========================================================
 def build_estimate_html(ctx: dict) -> str:
+    """
+    ctx 안에 들어가는 값:
+      clinic_name, contact_info, patient_name, issue_date, expiry_date,
+      consult_price, total_price, daily_cost, years,
+      clinic_logo_uri (str | ""), straumann_logo_uri, implant_uri, qr_uri, font_uri
+    """
+    # 치과 로고: 업로드된 게 있으면 이미지, 없으면 치과명 텍스트
     if ctx["clinic_logo_uri"]:
         clinic_logo_html = f'<img src="{ctx["clinic_logo_uri"]}" alt="clinic" style="max-height:26pt; max-width:150pt;" />'
     else:
         clinic_logo_html = f'<div class="clinic-name">{ctx["clinic_name"]}</div>'
 
+    # 폰트 @font-face (레포의 NanumGothic.ttf 임베드)
+    # normal + bold 두 굵기를 등록해야 font-weight:700이 진짜 굵은 폰트로 렌더됨
     font_face = ""
     font_family = "sans-serif"
     if ctx["font_uri"]:
@@ -147,6 +156,7 @@ def build_estimate_html(ctx: dict) -> str:
             src: url('{ctx["font_uri"]}') format('truetype');
             font-weight: normal;
         }}"""
+        # Bold 폰트가 있으면 추가 등록
         if ctx.get("font_bold_uri"):
             font_face += f"""
         @font-face {{
@@ -156,16 +166,19 @@ def build_estimate_html(ctx: dict) -> str:
         }}"""
         font_family = "'NanumGothic', sans-serif"
 
+    # 스트라우만 로고 (없으면 텍스트 폴백)
     if ctx["straumann_logo_uri"]:
         straumann_html = f'<img src="{ctx["straumann_logo_uri"]}" alt="Straumann" />'
     else:
         straumann_html = '<div style="font-size:16pt; font-weight:700; color:#3C3C3B;">straumann</div>'
 
+    # 임플란트 제품 패널 (없으면 패널 숨김)
     if ctx["implant_uri"]:
         product_panel = f'<div class="product-panel"><img src="{ctx["implant_uri"]}" alt="implant" /></div>'
     else:
         product_panel = ''
 
+    # QR (없으면 숨김)
     if ctx["qr_uri"]:
         qr_html = f'''<div class="qr-block">
               <img src="{ctx["qr_uri"]}" alt="QR" />
@@ -185,6 +198,7 @@ def build_estimate_html(ctx: dict) -> str:
 body {{ font-family: {font_family}; color: #2C2C2A; margin: 0; padding: 0; }}
 
 .page {{ width: 210mm; height: 297mm; padding: 16mm 14mm; display: flex; flex-direction: column; }}
+
 .header {{ display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 1px solid #2C2C2A; padding-bottom: 10pt; }}
 .label-cap {{ font-size: 7pt; letter-spacing: 0.15em; color: #595850; margin-bottom: 4pt; }}
 .clinic-name {{ font-size: 18pt; font-weight: 700; letter-spacing: -0.02em; white-space: nowrap; }}
@@ -197,31 +211,44 @@ body {{ font-family: {font_family}; color: #2C2C2A; margin: 0; padding: 0; }}
 .patient-info {{ font-size: 9pt; color: #5F5E5A; line-height: 1.6; }}
 .headline-wrap {{ margin-top: 14pt; }}
 .headline-eyebrow {{ font-size: 8.5pt; color: #1D9E75; letter-spacing: 0.1em; margin-bottom: 6pt; }}
-.headline {{ font-size: 22pt; font-weight: 700; line-height: 1.25; letter-spacing: -0.02em; color: #36393A; }}
-.headline small {{ display: block; font-size: 12.5pt; font-weight: 400; color: #5F5E5A; margin-top: 6pt; }}
-.product-panel {{ width: 78mm; background: transparent; overflow: hidden; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }}
+.headline {{ font-size: 22pt; font-weight: 400; line-height: 1.2; letter-spacing: -0.02em; color: #36393A; }}
+.headline strong {{ font-weight: 800; color: #2D7662; }}
+
+.product-panel {{ width: 78mm; background: transparent; border-radius: 4pt; overflow: hidden; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }}
 .product-panel img {{ width: 100%; height: auto; display: block; }}
 
-.summary-grid {{ margin-top: 16pt; display: grid; grid-template-columns: 1fr 1fr; gap: 12pt; }}
-.summary-box {{ background: #F5FBF8; border: 1px solid #D6ECE3; border-radius: 12pt; padding: 14pt 16pt; }}
-.summary-cap {{ font-size: 7.5pt; color: #2D7662; letter-spacing: 0.12em; margin-bottom: 5pt; }}
-.summary-main {{ font-size: 23pt; font-weight: 800; color: #169B74; letter-spacing: -0.03em; line-height: 1.12; }}
-.summary-sub {{ font-size: 7.5pt; color: #5F5E5A; margin-top: 4pt; line-height: 1.5; }}
+.price-box {{ margin-top: 14pt; background: #E1F5EE; padding: 13pt 16pt; border-radius: 3pt; display: flex; justify-content: space-between; align-items: flex-end; }}
+.price-box-note {{ margin-top: 3pt; font-size: 6pt; color: #5F5E5A; line-height: 1.3; padding-left: 2pt; }}
+.price-cap {{ font-size: 7.5pt; color: #2D7662; letter-spacing: 0.12em; margin-bottom: 4pt; }}
+.price-main {{ font-size: 19pt; font-weight: 800; color: #2D7662; letter-spacing: -0.02em; line-height: 1.1; }}
+.price-unit {{ font-size: 10pt; margin-left: 3pt; }}
+.price-sub {{ font-size: 7pt; color: #2D7662; margin-top: 4pt; opacity: 0.75; }}
 
-.item-table {{ margin-top: 16pt; }}
+.item-table {{ margin-top: 14pt; }}
 .item-header {{ display: grid; grid-template-columns: 1fr 90pt 110pt; gap: 14pt; font-size: 7pt; color: #595850; letter-spacing: 0.12em; padding-bottom: 5pt; border-bottom: 0.6px solid #9A988E; }}
-.item-header > div:nth-child(2), .item-header > div:nth-child(3) {{ text-align: right; }}
-.item-row {{ display: grid; grid-template-columns: 1fr 90pt 110pt; gap: 14pt; font-size: 9.5pt; padding: 8pt 0; border-bottom: 0.5px solid #E5E4DF; }}
+.item-header > div:nth-child(2) {{ text-align: right; }}
+.item-header > div:nth-child(3) {{ text-align: right; }}
+.item-row {{ display: grid; grid-template-columns: 1fr 90pt 110pt; gap: 14pt; font-size: 9.5pt; padding: 7pt 0; border-bottom: 0.5px solid #E5E4DF; }}
 .item-row > div:nth-child(1) {{ font-weight: 700; }}
 .item-row > div:nth-child(2) {{ color: #5F5E5A; text-align: right; }}
 .item-row > div:nth-child(3) {{ text-align: right; font-weight: 700; }}
 
-.daily-box {{ margin-top: 18pt; background: #F8F9FA; border-left: 7pt solid #46B98C; border-radius: 0 12pt 12pt 0; padding: 20pt 22pt 18pt 20pt; }}
-.daily-title {{ font-size: 12pt; color: #555; text-align: center; }}
-.daily-value {{ margin-top: 8pt; font-size: 38pt; font-weight: 800; color: #46B98C; text-align: center; line-height: 1; }}
-.daily-note {{ margin-top: 12pt; font-size: 7.4pt; color: #70757A; line-height: 1.65; text-align: left; }}
+.brand-section {{ margin-top: auto; padding-top: 14pt; border-top: 1px solid #2C2C2A; }}
+.brand-grid {{ display: grid; grid-template-columns: 1.2fr 1fr; gap: 18pt; }}
+.brand-label {{ font-size: 7.5pt; color: #1D9E75; letter-spacing: 0.12em; margin-bottom: 6pt; }}
+.brand-copy {{ font-size: 8.5pt; line-height: 1.7; color: #444441; }}
+.stat-grid {{ display: grid; grid-template-columns: 1fr 1fr; gap: 5pt; }}
+.stat-card {{ border: 0.6px solid #9A988E; padding: 7pt 8pt; border-radius: 2pt; }}
+.stat-value {{ font-size: 13pt; font-weight: 700; color: #2D7662; line-height: 1.1; }}
+.stat-unit {{ font-size: 7.5pt; color: #595850; margin-left: 2pt; font-weight: 400; }}
+.stat-sup {{ font-size: 6pt; color: #595850; margin-left: 1pt; vertical-align: super; }}
+.stat-label {{ font-size: 7.5pt; color: #5F5E5A; margin-top: 2pt; }}
 
-.footer {{ margin-top: auto; padding-top: 10pt; border-top: 0.6px solid #9A988E; display: flex; justify-content: space-between; align-items: flex-end; gap: 14pt; }}
+.citations {{ margin-top: 10pt; padding-top: 8pt; border-top: 0.5px solid #E5E4DF; font-size: 6.5pt; color: #4A4945; line-height: 1.55; }}
+.citations sup {{ margin-right: 2pt; font-size: 5pt; }}
+.citations > div + div {{ margin-top: 2pt; }}
+
+.footer {{ margin-top: 10pt; padding-top: 10pt; border-top: 0.6px solid #9A988E; display: flex; justify-content: space-between; align-items: center; gap: 14pt; }}
 .notice {{ font-size: 6.8pt; color: #4A4945; line-height: 1.7; flex: 1; }}
 .notice > div + div {{ margin-top: 2pt; }}
 .qr-block {{ display: flex; flex-direction: column; align-items: center; justify-content: center; flex-shrink: 0; }}
@@ -254,41 +281,53 @@ body {{ font-family: {font_family}; color: #2C2C2A; margin: 0; padding: 0; }}
       </div>
       <div class="headline-wrap">
         <div class="headline-eyebrow">ESTIMATE</div>
-        <div class="headline">임플란트 치료<br>예상 치료비 안내서</div>
+        <div class="headline">임플란트 치료<br><strong>예상 치료비 안내서</strong></div>
       </div>
     </div>
     {product_panel}
   </div>
 
-  <div class="summary-grid">
-    <div class="summary-box">
-      <div class="summary-cap">예상 치료비 / ESTIMATED COST</div>
-      <div class="summary-main">{ctx["consult_price"]:,}원</div>
-      <div class="summary-sub">임플란트 총비용: {ctx["total_price"]:,}원</div>
+  <div class="price-box">
+    <div>
+      <div class="price-cap">예상 치료비 / ESTIMATED COST</div>
+      <div class="price-main">{ctx["consult_price"]:,}<span class="price-unit">원</span></div>
+      <div class="price-sub">임플란트 총비용: {ctx["total_price"]:,}원</div>
     </div>
-    <div class="summary-box">
-      <div class="summary-cap">예상 사용기간 기준 / 하루 평균</div>
-      <div class="summary-main">{ctx["daily_cost"]:,}원</div>
-      <div class="summary-sub">예상 사용기간 {ctx["years"]}년 기준 단순 환산 금액</div>
+    <div style="text-align: right;">
+      <div class="price-cap">하루 평균 / {ctx["years"]}년 기준</div>
+      <div class="price-main">{ctx["daily_cost"]:,}<span class="price-unit">원/일</span></div>
     </div>
   </div>
-
+  <div class="price-box-note">
+    *환자의 상태에 따라 달라질 수 있으며, 입력된 수치를 기반으로 단순 계산된 예시입니다.
+  </div>
   <div class="item-table">
     <div class="item-header"><div>ITEM</div><div>BRAND</div><div>AMOUNT</div></div>
     <div class="item-row"><div>임플란트 식립</div><div>Straumann</div><div>{ctx["consult_price"]:,}원</div></div>
   </div>
 
-  <div class="daily-box">
-    <div class="daily-title">예상 사용기간 기준 하루 평균 환산 금액</div>
-    <div class="daily-value">{ctx["daily_cost"]:,}원</div>
-    <div class="daily-note">
-      입력한 금액과 예상 사용기간을 기준으로 단순 환산한 참고 금액입니다.<br>
-      실제 사용기간, 치료 결과 및 유지 상태는 환자의 구강 상태, 시술 조건 및 사후 관리에 따라 달라질 수 있습니다.
+  <div class="brand-section">
+    <div class="brand-grid">
+      <div>
+        <div class="brand-label">WHY STRAUMANN</div>
+        <div class="brand-copy">스트라우만은 70년 이상 임플란트 분야의 연구와 임상 경험을 통해 전 세계 100여 개국에서 신뢰받는 세계 임플란트 시장 점유율 1위 브랜드입니다.<sup>2</sup></div>
+      </div>
+      <div class="stat-grid">
+        <div class="stat-card"><div class="stat-value">70<span class="stat-unit">YEARS</span></div><div class="stat-label">스위스 헤리티지</div></div>
+        <div class="stat-card"><div class="stat-value">99.7<span class="stat-unit">%</span><span class="stat-sup">1</span></div><div class="stat-label">10년 implant-level<br>survival rate (보고치)</div></div>
+        <div class="stat-card"><div class="stat-value">#1<span class="stat-unit">GLOBAL</span><span class="stat-sup">2</span></div><div class="stat-label">세계 시장 점유율</div></div>
+        <div class="stat-card"><div class="stat-value">100<span class="stat-unit">+</span></div><div class="stat-label">국가 사용</div></div>
+      </div>
+    </div>
+    <div class="citations">
+      <div><sup>1</sup>van Velzen FJ, et al. J Clin Periodontol. 2015; 374 implants, 177 patients, 10-year follow-up</div>
+      <div><sup>2</sup>Fortune Business Insights, Dental Implants – Global Market Analysis, Insights and Forecast, 2021–2028 (2021년 기준)</div>
     </div>
   </div>
 
   <div class="footer">
     <div class="notice">
+      <div>※ 표시된 금액은 입력값을 기준으로 단순 환산한 예시이며, 실제 치료비, 치료 결과 및 사용기간은 환자의 상태, 치료계획, 시술 조건 및 사후 관리에 따라 달라질 수 있습니다.</div>
       <div>※ 본 자료는 외부 배포, SNS, 블로그, 광고물 등에 사용할 수 없습니다.</div>
       <div>※ 환자의 식별 정보는 저장되지 않으며, 상담 종료 시 삭제됩니다.</div>
       <div style="margin-top:4pt;">문의: {ctx["contact_info"]}</div>
