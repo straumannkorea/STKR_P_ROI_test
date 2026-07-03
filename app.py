@@ -81,12 +81,11 @@ st.markdown("""
         margin-bottom: 10px;
     }
     .sidebar-evidence-disclaimer {
-        margin-top: 10px;
-        padding-top: 10px;
-        border-top: 1px solid #E3ECE8;
         color: #8A8F94;
-        font-size: 0.78rem;
+        font-size: 0.76rem;
         line-height: 1.55;
+        margin: -2px 4px 16px 4px;
+        padding: 0 2px;
     }
     .sidebar-mini-link {
         font-size: 0.9rem;
@@ -336,8 +335,11 @@ with st.sidebar:
             <div class="sidebar-evidence-title">국내 장기 추적 연구에서 보고된<br>10년 누적 생존율</div>
             <div class="sidebar-evidence-body">국내 장기 추적 연구에서, Straumann tissue-level 임플란트의 10년 누적 생존율은 임플란트 기준 98.23%로 보고되었습니다.*</div>
             <div class="sidebar-mini-link">{tooltip_link('연구 조건 보기', tooltip_2)}</div>
-            <div class="sidebar-evidence-disclaimer">*해당 수치는 특정 연구 대상, 조건 및 기간에서 보고된 결과이며, 모든 환자에게 동일하게 적용되지 않습니다.</div>
         </div>
+    """, unsafe_allow_html=True)
+
+    st.markdown("""
+        <div class="sidebar-evidence-disclaimer">*해당 수치는 특정 연구 대상, 조건 및 기간에서 보고된 결과이며, 모든 환자에게 동일하게 적용되지 않습니다.</div>
     """, unsafe_allow_html=True)
 
     st.divider()
