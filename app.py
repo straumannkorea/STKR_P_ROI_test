@@ -453,8 +453,8 @@ with tab2:
     st.subheader("오래 쓰는 선택, 스트라우만")
     detail_images = [
         os.path.join(APP_DIR, "상세페이지 1.png"),
-        os.path.join(APP_DIR, "#상세페이지 2.png"),
-        os.path.join(APP_DIR, "#상세페이지 3.png"),
+        os.path.join(APP_DIR, "상세페이지 2.png"),
+        os.path.join(APP_DIR, "상세페이지 3.png"),
     ]
     for img in detail_images:
         if os.path.exists(img):
