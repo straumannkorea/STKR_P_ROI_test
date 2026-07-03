@@ -9,7 +9,7 @@ APP_DIR = os.path.dirname(os.path.abspath(__file__))
 # ==========================================================
 # 공통 CSS
 # ==========================================================
-st.set_page_config(page_title="스트라우만 가치 계산기", layout="wide")
+st.set_page_config(page_title="스트라우만 가치 계산기", layout="centered")
 
 st.markdown("""
 <style>
@@ -79,6 +79,14 @@ st.markdown("""
         color: #485057;
         line-height: 1.65;
         margin-bottom: 10px;
+    }
+    .sidebar-evidence-disclaimer {
+        margin-top: 10px;
+        padding-top: 10px;
+        border-top: 1px solid #E3ECE8;
+        color: #8A8F94;
+        font-size: 0.78rem;
+        line-height: 1.55;
     }
     .sidebar-mini-link {
         font-size: 0.9rem;
@@ -304,14 +312,12 @@ with st.sidebar:
     tooltip_1 = (
         "van Velzen FJ, et al. J Clin Periodontol. 2015. "
         "177명 환자, 374개 Straumann SLA surface implant 대상 10년 전향적 코호트 연구입니다. "
-        "10년 생존율은 implant-level 99.7%, patient-level 99.4%로 보고되었습니다. "
-        "해당 수치는 특정 연구 대상·조건·기간에서 보고된 결과이며 모든 환자에게 동일하게 적용되지 않습니다."
+        "10년 생존율은 implant-level 99.7%, patient-level 99.4%로 보고되었습니다."
     )
     tooltip_2 = (
         "Kim S, Jung U-W, Cho K-S, Lee J-S. Clin Implant Dent Relat Res. 2018. "
         "881명 환자, 1,692개 Straumann tissue-level 임플란트를 분석한 국내 장기 추적 연구입니다. "
-        "10년 누적 생존율은 implant-level 98.23%, patient-level 95.70%로 보고되었습니다. "
-        "해당 수치는 특정 연구 대상·조건·기간에서 보고된 결과이며 모든 환자에게 동일하게 적용되지 않습니다."
+        "10년 누적 생존율은 implant-level 98.23%, patient-level 95.70%로 보고되었습니다."
     )
 
     st.markdown(f"""
@@ -321,6 +327,7 @@ with st.sidebar:
             <div class="sidebar-evidence-title">10년 추적 연구에서 보고된<br>10년 생존율</div>
             <div class="sidebar-evidence-body">10년 추적 연구에서 Straumann SLA 표면 임플란트는 특정 연구 조건하에 10년 생존율 99.7%가 보고되었습니다.*</div>
             <div class="sidebar-mini-link">{tooltip_link('연구 조건 보기', tooltip_1)}</div>
+            <div class="sidebar-evidence-disclaimer">*해당 수치는 특정 연구 대상, 조건 및 기간에서 보고된 결과이며, 모든 환자에게 동일하게 적용되지 않습니다.</div>
         </div>
     """, unsafe_allow_html=True)
 
@@ -331,6 +338,7 @@ with st.sidebar:
             <div class="sidebar-evidence-title">국내 장기 추적 연구에서 보고된<br>10년 누적 생존율</div>
             <div class="sidebar-evidence-body">국내 장기 추적 연구에서, Straumann tissue-level 임플란트의 10년 누적 생존율은 임플란트 기준 98.23%로 보고되었습니다.*</div>
             <div class="sidebar-mini-link">{tooltip_link('연구 조건 보기', tooltip_2)}</div>
+            <div class="sidebar-evidence-disclaimer">*해당 수치는 특정 연구 대상, 조건 및 기간에서 보고된 결과이며, 모든 환자에게 동일하게 적용되지 않습니다.</div>
         </div>
     """, unsafe_allow_html=True)
 
@@ -369,8 +377,8 @@ with tab1:
     c1, c2 = st.columns(2)
     with c1:
         total_p = st.number_input("임플란트 총 비용 (원)", value=1500000, step=10000)
-        discount = st.number_input("조정 금액 (원)", value=0, step=10000)
-        final_p = total_p - discount
+        discount = st.number_input("조정 금액 (원)", value=0, min_value=0, max_value=int(total_p), step=10000)
+        final_p = max(total_p - discount, 0)
         st.markdown(f"**예상 치료비 : {final_p:,.0f}원**")
         st.caption(f"(임플란트 총비용 : {total_p:,.0f}원)")
     with c2:
